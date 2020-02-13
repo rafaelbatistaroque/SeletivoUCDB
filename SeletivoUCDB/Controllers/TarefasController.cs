@@ -75,7 +75,16 @@ namespace SeletivoUCDB.Controllers
         {
             using (var db = new SeletivoUCDBDbContext())
             {
-                return Json(db.Tarefas.ToList().Where(x => x.DataHora.Day == DateTime.Now.Day), JsonRequestBehavior.AllowGet);
+                return Json(db.Tarefas.ToList().Where(x => x.DataHora.Day.Equals(DateTime.Now.Day)), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: Tarefas/ObterListaDeTarefasComStatusPendenteNoBD
+        public JsonResult ObterListaDeTarefasComStatusPendenteNoBD()
+        {
+            using (var db = new SeletivoUCDBDbContext())
+            {
+                return Json(db.Tarefas.ToList().Where(x => x.StatusTarefa.Equals("Pendente")), JsonRequestBehavior.AllowGet);
             }
         }
     }
