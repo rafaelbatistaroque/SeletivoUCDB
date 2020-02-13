@@ -1,19 +1,25 @@
-﻿<div class="container body-content jumbotron" ng-controller="tarefaCtrl">
-    <ul class="body-content" style="display: flex; flex-direction: column;">
-        <li ng-repeat="tarefa in Tarefas" ng-class="tarefa.Cor" style="display: flex;">
-            <div style="display: flex; flex: 1; justify-content: space-between;">
-                <span style="flex: 1;">{{tarefa.Descricao}} </span>
-                <span style="flex: 1;">{{tarefa.DataHora}}</span>
+﻿<h1 class="text-center">Lista de tarefas</h1>
+<div class="container body-content jumbotron" ng-controller="tarefaCtrl">
+    <ul class="body-content" id="lista-tarefa">
+        <li ng-repeat="tarefa in Tarefas" ng-class="tarefa.Cor">
+            <div class="container-tarefa">
+                <span class="itens-lista" style="flex: 1;" ng-bind="tarefa.Descricao">Aguarde...</span>
+                <span class="itens-lista" ng-bind="tarefa.DataHora" >Aguarde...</span>
 
                 @* MENU DE STATUS DA TAREFA *@
-                <div class="dropdown" style="flex: 1">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{tarefa.StatusTarefa}}
+                <div class="dropdown itens-lista">
+                    <button class="btn btn-default dropdown-toggle"
+                            type="button"
+                            id="dropdownMenu1"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true"
+                            ng-bind="tarefa.StatusTarefa">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li ng-repeat="opcao in opcoesStatus">
-                            <a href="" ng-click="atualizarStatusDeTarefa(opcao.status, tarefa.Id)">{{opcao.status}}</a>
+                            <a href="" ng-click="atualizarStatusDeTarefa(opcao.status, tarefa.Id)" ng-bind="opcao.status">Aguarde...</a>
                         </li>
                     </ul>
                 </div>

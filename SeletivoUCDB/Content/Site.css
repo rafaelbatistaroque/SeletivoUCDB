@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+#container-cinza {
+    margin-top: 40px;
+}
+#lista-tarefa {
+    display: flex;
+    flex-direction: column;
+}
+#lista-tarefa li{
+    display: flex;
+}
+.container-tarefa {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+.itens-lista {
+    flex: 1;
+}

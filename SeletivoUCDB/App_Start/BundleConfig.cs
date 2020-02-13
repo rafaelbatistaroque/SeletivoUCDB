@@ -23,7 +23,9 @@ namespace SeletivoUCDB
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/css-site").Include(
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
