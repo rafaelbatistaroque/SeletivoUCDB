@@ -1,5 +1,6 @@
 ﻿using SeletivoUCDB.BD;
 using SeletivoUCDB.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -15,6 +16,7 @@ namespace SeletivoUCDB.Controllers
                 return Json(db.Tarefas.ToList(), JsonRequestBehavior.AllowGet);
             }
         }
+        
         // POST Tarefas/AdicionarTarefaNoBD
         [HttpPost]
         public JsonResult AdicionarTarefaNoBD(Tarefa tarefa)
@@ -65,6 +67,15 @@ namespace SeletivoUCDB.Controllers
                     return Json(new { success = true });
                 }
                 return Json(new { success = false });
+            }
+        }
+
+        // GET: Tarefas/ObterListaDeTarefasDeHojeNoBD
+        public JsonResult ObterListaDeTarefasDeHojeNoBD()
+        {
+            using (var db = new SeletivoUCDBDbContext())
+            {
+                return Json(db.Tarefas.ToList().Where(x => x.DataHora.Day == DateTime.Now.Day), JsonRequestBehavior.AllowGet);
             }
         }
     }
