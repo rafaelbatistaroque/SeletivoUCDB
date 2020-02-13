@@ -28,6 +28,15 @@ namespace SeletivoUCDB
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app-module").Include(
+                        "~/Scripts/app-angular/app-module.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app-controller").Include(
+                         "~/Scripts/app-angular/app-controller.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app-service").Include(
+                        "~/Scripts/app-angular/app-service.js"));
         }
     }
 }
