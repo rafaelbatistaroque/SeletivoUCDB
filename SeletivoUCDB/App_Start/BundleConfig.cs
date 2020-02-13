@@ -37,6 +37,9 @@ namespace SeletivoUCDB
 
             bundles.Add(new ScriptBundle("~/bundles/app-service").Include(
                         "~/Scripts/app-angular/app-service.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/Scripts/moment.js"));
         }
     }
 }
