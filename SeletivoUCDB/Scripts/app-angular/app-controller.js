@@ -29,14 +29,8 @@
         );
     };
 
-    //Desabilita botão add se campo tarefa é vazio
-    $scope.validarInputDescricaoTarefa = function () {
-        $scope.StatusButton =
-            ($scope.inputTarefa == undefined || $scope.inputTarefa == '') ? true : false;
-    };
-
     //Obter Tarefas
-    function obterListaDeTarefasParaSeremCarregadasEmTela() {
+    $scope.obterListaDeTarefasParaSeremCarregadasEmTela = function() {
         $scope.validarInputDescricaoTarefa();
 
         tarefaServices.acessarRepositorioParaObterListaTarefas().then(function (cadaTarefaRetornada) {
@@ -44,6 +38,23 @@
             trataFormatoDeDatasParaExibicaoNaLista();
             alteraCoresDoConformeStatusDeTarefa();
         }, () => alert("Erro ao obter Tarefas"));
+    };
+
+    //FILTRO
+    //Obter tarefas de hoje
+    $scope.obterListaDeTarefasComDataDeHoje = function(){
+        tarefaServices.acessarRepositorioParaObterTarefasDeHoje()
+            .then(function (cadaTarefaRetornada) {
+                $scope.Tarefas = cadaTarefaRetornada.data;
+                trataFormatoDeDatasParaExibicaoNaLista();
+                alteraCoresDoConformeStatusDeTarefa();
+            }, () => alert("Erro ao obter Tarefas"));
+    };
+
+    //Desabilita botão add se campo tarefa é vazio
+    $scope.validarInputDescricaoTarefa = function () {
+        $scope.StatusButton =
+            ($scope.inputTarefa == undefined || $scope.inputTarefa == '') ? true : false;
     };
 
     //Incluir Tarefa
@@ -57,7 +68,7 @@
         tarefaServices.acessarRepositorioParaInserirNovaTarefa(novoObjetoTarefa)
             .then(function (respostaInclusao) {
                 if (respostaInclusao.data.success) {
-                    obterListaDeTarefasParaSeremCarregadasEmTela();
+                    $scope.obterListaDeTarefasParaSeremCarregadasEmTela();
                     alert("Adicionado!");
                 } else alert("Tarefa não adicionada");
 
@@ -76,7 +87,7 @@
         tarefaServices.acessarRepositorioParaAtualizarTarefa(tarefaParaAtualizar)
             .then(function (respostaAtualizacao) {
                 if (respostaAtualizacao.data.success) {
-                    obterListaDeTarefasParaSeremCarregadasEmTela();
+                    $scope.obterListaDeTarefasParaSeremCarregadasEmTela();
                     alert("Tarefa Atualizada!");
                 } else alert("Tarefa não Atualizada");
             }, () => alert("Deu ruim"));
@@ -87,11 +98,11 @@
          tarefaServices.acessarRepositorioParaExcluirTarefa(idTarefa)
             .then(function (respostaExclusao) {
                 if (respostaExclusao.data.success) {
-                    obterListaDeTarefasParaSeremCarregadasEmTela();
+                    $scope.obterListaDeTarefasParaSeremCarregadasEmTela();
                     alert("Tarefa Excluída!");
                 } else alert("Tarefa não pode ser excluída");
             }, () => alert("Deu ruim"));
     };
 
-    obterListaDeTarefasParaSeremCarregadasEmTela();
+    $scope.obterListaDeTarefasParaSeremCarregadasEmTela();
 });
