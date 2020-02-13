@@ -1,10 +1,17 @@
 ﻿<h1 class="text-center">Lista de tarefas</h1>
 <div class="container body-content jumbotron" ng-controller="tarefaCtrl">
+    <div class="form-group">
+        <div class="btn-group container" role="group" aria-label="...">
+            <button class="btn btn-default" ng-click="obterListaDeTarefasComDataDeHoje()">Atividades do dia</button>
+            <button class="btn btn-default">Atividades pendentes</button>
+            <button class="btn btn-default" ng-click="obterListaDeTarefasParaSeremCarregadasEmTela()">Todas</button>
+        </div>
+    </div>
     <ul class="body-content" id="lista-tarefa">
         <li ng-repeat="tarefa in Tarefas" ng-class="tarefa.Cor">
             <div class="container-tarefa">
                 <span class="itens-lista" style="flex: 1;" ng-bind="tarefa.Descricao">Aguarde...</span>
-                <span class="itens-lista" ng-bind="tarefa.DataHora" >Aguarde...</span>
+                <span class="itens-lista" ng-bind="tarefa.DataHora">Aguarde...</span>
 
                 @* MENU DE STATUS DA TAREFA *@
                 <div class="dropdown itens-lista">
