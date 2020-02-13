@@ -31,5 +31,24 @@ namespace SeletivoUCDB.Controllers
             }
             return Json(new { success = false });
         }
+
+        // POST Tarefas/AtualizarStatusDaTarefaNoBD
+        [HttpPost]
+        public JsonResult AtualizarStatusDaTarefaNoBD(Tarefa tarefa)
+        {
+            if (tarefa != null)
+            {
+                using (var db = new SeletivoUCDBDbContext())
+                {
+                    var tarefaLocalizada = db.Tarefas.Find(tarefa.Id);
+
+                    tarefaLocalizada.StatusTarefa = tarefa.StatusTarefa;
+                    db.SaveChanges();
+
+                    return Json(new { success = true });
+                }
+            }
+            return Json(new { success = false });
+        }
     }
 }
