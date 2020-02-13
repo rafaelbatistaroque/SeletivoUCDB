@@ -50,5 +50,22 @@ namespace SeletivoUCDB.Controllers
             }
             return Json(new { success = false });
         }
+
+        // POST Tarefas/ExcluirRegistroDeTarefaNoBD/
+        [HttpPost]
+        public JsonResult ExcluirRegistroDeTarefaNoBD(int id)
+        {
+            using (var db = new SeletivoUCDBDbContext())
+            {
+                var tarefaLocalizada = db.Tarefas.Find(id);
+                if (tarefaLocalizada != null)
+                {
+                    db.Tarefas.Remove(tarefaLocalizada);
+                    db.SaveChanges();
+                    return Json(new { success = true });
+                }
+                return Json(new { success = false });
+            }
+        }
     }
 }
