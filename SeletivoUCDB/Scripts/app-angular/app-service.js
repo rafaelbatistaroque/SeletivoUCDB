@@ -29,4 +29,5 @@ appTarefas.service("tarefaServices", function ($http) {
 
     this.acessarRepositorioParaObterTarefasDeHoje = () => $http.get("/Tarefas/ObterListaDeTarefasDeHojeNoBD");
 
+    this.acessarRepositorioParaObterTarefasComStatusPendente = () => $http.get("/Tarefas/ObterListaDeTarefasComStatusPendenteNoBD");
 });
