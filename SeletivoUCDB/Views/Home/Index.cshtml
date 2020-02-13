@@ -1,10 +1,23 @@
 ﻿<div class="container body-content jumbotron" ng-controller="tarefaCtrl">
-    <ul class="body-content" style="display: flex; flex-direction: column;" ;>
+    <ul class="body-content" style="display: flex; flex-direction: column;">
         <li ng-repeat="tarefa in Tarefas" style="display: flex;">
             <div style="display: flex; flex: 1; justify-content: space-between;">
                 <span style="flex: 1;">{{tarefa.Descricao}} </span>
                 <span style="flex: 1;">{{tarefa.DataHora}}</span>
-                <span style="flex: 1;">{{tarefa.StatusTarefa}}</span>
+
+                @* MENU DE STATUS DA TAREFA *@
+                <div class="dropdown" style="flex: 1">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{tarefa.StatusTarefa}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li ng-repeat="opcao in opcoesStatus">
+                            <a href="" ng-click="atualizarStatusDeTarefa(opcao.status, tarefa.Id)">{{opcao.status}}</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </li>
     </ul>
