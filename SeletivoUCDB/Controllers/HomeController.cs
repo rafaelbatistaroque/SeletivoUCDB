@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace SeletivoUCDB.Controllers
 {
@@ -10,19 +6,20 @@ namespace SeletivoUCDB.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.title = "Lista de tarefas";
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Clique aqui para acessar repositório do projeto";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Estou a disposição para contato.";
 
             return View();
         }
