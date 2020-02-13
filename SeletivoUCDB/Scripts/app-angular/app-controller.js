@@ -55,5 +55,16 @@
             }, () => alert("Deu ruim"));
     };
 
+    //Excluir Tarefa
+    $scope.deletarTarefaDaLista = function (idTarefa) {
+         tarefaServices.acessarRepositorioParaExcluirTarefa(idTarefa)
+            .then(function (respostaExclusao) {
+                if (respostaExclusao.data.success) {
+                    obterListaDeTarefasParaSeremCarregadasEmTela();
+                    alert("Tarefa Excluída!");
+                } else alert("Tarefa não pode ser excluída");
+            }, () => alert("Deu ruim"));
+    };
+
     obterListaDeTarefasParaSeremCarregadasEmTela();
 });
