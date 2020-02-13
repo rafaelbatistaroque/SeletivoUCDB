@@ -7,11 +7,11 @@
         { status: "Pendente" }
     ];
 
-    function limparCampos() {
+    function _limparCampos() {
         $scope.inputTarefa = "";
         $scope.inputHoraData = "";
     };
-    function trataFormatoDeDatasParaExibicaoNaLista() {
+    function _trataFormatoDeDatasParaExibicaoNaLista() {
         $scope.Tarefas.forEach(function (item) {
             //Mudar para TimeStamp para cálculo
             item["DataTimeStamp"] = +item["DataHora"].slice(6, 19);
@@ -19,7 +19,7 @@
             item["DataHora"] = moment(item["DataHora"]).format("DD/MM/YYYY hh:mm:ss");
         });
     };
-    function alteraCoresDoConformeStatusDeTarefa() {
+    function _alteraCoresDoConformeStatusDeTarefa() {
         $scope.DataAtual = new Date().getTime();
 
         $scope.Tarefas.forEach(item => item["Cor"] =
@@ -35,20 +35,9 @@
 
         tarefaServices.acessarRepositorioParaObterListaTarefas().then(function (cadaTarefaRetornada) {
             $scope.Tarefas = cadaTarefaRetornada.data;
-            trataFormatoDeDatasParaExibicaoNaLista();
-            alteraCoresDoConformeStatusDeTarefa();
+            _trataFormatoDeDatasParaExibicaoNaLista();
+            _alteraCoresDoConformeStatusDeTarefa();
         }, () => alert("Erro ao obter Tarefas"));
-    };
-
-    //FILTRO
-    //Obter tarefas de hoje
-    $scope.obterListaDeTarefasComDataDeHoje = function(){
-        tarefaServices.acessarRepositorioParaObterTarefasDeHoje()
-            .then(function (cadaTarefaRetornada) {
-                $scope.Tarefas = cadaTarefaRetornada.data;
-                trataFormatoDeDatasParaExibicaoNaLista();
-                alteraCoresDoConformeStatusDeTarefa();
-            }, () => alert("Erro ao obter Tarefas"));
     };
 
     //Desabilita botão add se campo tarefa é vazio
@@ -72,7 +61,7 @@
                     alert("Adicionado!");
                 } else alert("Tarefa não adicionada");
 
-                limparCampos();
+                _limparCampos();
 
             }, () => alert("Deu ruim"));
     };
@@ -102,6 +91,27 @@
                     alert("Tarefa Excluída!");
                 } else alert("Tarefa não pode ser excluída");
             }, () => alert("Deu ruim"));
+    };
+
+    //FILTROS
+    //Obter tarefas de hoje
+    $scope.obterListaDeTarefasComDataDeHoje = function(){
+        tarefaServices.acessarRepositorioParaObterTarefasDeHoje()
+            .then(function (cadaTarefaRetornada) {
+                $scope.Tarefas = cadaTarefaRetornada.data;
+                _trataFormatoDeDatasParaExibicaoNaLista();
+                _alteraCoresDoConformeStatusDeTarefa();
+            }, () => alert("Erro ao obter Tarefas"));
+    };
+
+    //Obter tarefas de Pendente
+    $scope.obterListaDeTarefasComStatusPendente = function () {
+        tarefaServices.acessarRepositorioParaObterTarefasComStatusPendente()
+            .then(function (cadaTarefaRetornada) {
+                $scope.Tarefas = cadaTarefaRetornada.data;
+                _trataFormatoDeDatasParaExibicaoNaLista();
+                _alteraCoresDoConformeStatusDeTarefa();
+            }, () => alert("Erro ao obter Tarefas"));
     };
 
     $scope.obterListaDeTarefasParaSeremCarregadasEmTela();
