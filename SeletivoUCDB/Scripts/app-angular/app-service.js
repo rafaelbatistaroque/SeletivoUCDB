@@ -26,4 +26,7 @@ appTarefas.service("tarefaServices", function ($http) {
     };
 
     this.acessarRepositorioParaExcluirTarefa = (idTarefa) => $http.post("/Tarefas/ExcluirRegistroDeTarefaNoBD/" + idTarefa);
+
+    this.acessarRepositorioParaObterTarefasDeHoje = () => $http.get("/Tarefas/ObterListaDeTarefasDeHojeNoBD");
+
 });
