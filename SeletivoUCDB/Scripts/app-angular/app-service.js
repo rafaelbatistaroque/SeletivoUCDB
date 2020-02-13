@@ -20,5 +20,5 @@
         return requisicao;
     };
 
-
+    this.acessarRepositorioParaExcluirTarefa = (idTarefa) => $http.post("/Tarefas/ExcluirRegistroDeTarefaNoBD/" + idTarefa);
 });
