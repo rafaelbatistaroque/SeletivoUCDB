@@ -11,11 +11,21 @@
         $scope.inputTarefa = "";
         $scope.inputHoraData = "";
     };
+    function trataFormatoDeDatasParaExibicaoNaLista() {
+        $scope.Tarefas.forEach(function (item) {
+            //Mudar para TimeStamp para cálculo
+            item["DataTimeStamp"] = +item["DataHora"].slice(6, 19);
+            //Mudar para formato de exibição
+            item["DataHora"] = moment(item["DataHora"]).format("DD/MM/YYYY hh:mm:ss");
+        });
+    };
+
 
     //Obter Tarefas
     function obterListaDeTarefasParaSeremCarregadasEmTela() {
         tarefaServices.acessarRepositorioParaObterListaTarefas().then(function (cadaTarefaRetornada) {
             $scope.Tarefas = cadaTarefaRetornada.data;
+            trataFormatoDeDatasParaExibicaoNaLista();
         }, () => alert("Erro ao obter Tarefas"));
     };
 
