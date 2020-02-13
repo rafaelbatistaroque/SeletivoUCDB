@@ -22,8 +22,8 @@
         </li>
     </ul>
     <div style="display: flex; justify-content: space-around;">
-        <input type="text" ng-model="inputTarefa" class="form-control" placeholder="Sua tarefa">
+        <input type="text" ng-model="inputTarefa" ng-change="validarInputDescricaoTarefa()" class="form-control" placeholder="Sua tarefa">
         <input type="datetime-local" ng-model="inputHoraData" class="form-control" min="2020-01-01T00:00" value="2020-01-01T12:00:00.000">
-        <button ng-click="incluirNovaTarefaNaLista()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+        <button ng-click="incluirNovaTarefaNaLista()" class="btn btn-primary" ng-disabled="StatusButton"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
 </div>

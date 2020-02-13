@@ -29,8 +29,16 @@
         );
     };
 
+    //Desabilita botão add se campo tarefa é vazio
+    $scope.validarInputDescricaoTarefa = function () {
+        $scope.StatusButton =
+            ($scope.inputTarefa == undefined || $scope.inputTarefa == '') ? true : false;
+    };
+
     //Obter Tarefas
     function obterListaDeTarefasParaSeremCarregadasEmTela() {
+        $scope.validarInputDescricaoTarefa();
+
         tarefaServices.acessarRepositorioParaObterListaTarefas().then(function (cadaTarefaRetornada) {
             $scope.Tarefas = cadaTarefaRetornada.data;
             trataFormatoDeDatasParaExibicaoNaLista();
