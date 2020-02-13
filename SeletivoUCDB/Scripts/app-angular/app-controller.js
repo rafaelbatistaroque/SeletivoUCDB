@@ -1,5 +1,11 @@
 ﻿appTarefas.controller('tarefaCtrl', function ($scope, tarefaServices) {
 
+    $scope.opcoesStatus = [
+        { status: "Pra fazer" },
+        { status: "Concluída!" },
+        { status: "Não fazer" },
+        { status: "Pendente" }
+    ];
 
     function limparCampos() {
         $scope.inputTarefa = "";
@@ -30,6 +36,22 @@
 
                 limparCampos();
 
+            }, () => alert("Deu ruim"));
+    };
+
+    //Atualizar Status
+    $scope.atualizarStatusDeTarefa = function (itemLista, idTarefa) {
+        var tarefaParaAtualizar = {
+            Id: idTarefa,
+            StatusTarefa: itemLista
+        };
+
+        tarefaServices.acessarRepositorioParaAtualizarTarefa(tarefaParaAtualizar)
+            .then(function (respostaAtualizacao) {
+                if (respostaAtualizacao.data.success) {
+                    obterListaDeTarefasParaSeremCarregadasEmTela();
+                    alert("Tarefa Atualizada!");
+                } else alert("Tarefa não Atualizada");
             }, () => alert("Deu ruim"));
     };
 
