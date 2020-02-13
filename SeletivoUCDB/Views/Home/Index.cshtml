@@ -1,6 +1,6 @@
 ﻿<div class="container body-content jumbotron" ng-controller="tarefaCtrl">
     <ul class="body-content" style="display: flex; flex-direction: column;">
-        <li ng-repeat="tarefa in Tarefas" style="display: flex;">
+        <li ng-repeat="tarefa in Tarefas" ng-class="tarefa.Cor" style="display: flex;">
             <div style="display: flex; flex: 1; justify-content: space-between;">
                 <span style="flex: 1;">{{tarefa.Descricao}} </span>
                 <span style="flex: 1;">{{tarefa.DataHora}}</span>

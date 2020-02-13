@@ -19,13 +19,22 @@
             item["DataHora"] = moment(item["DataHora"]).format("DD/MM/YYYY hh:mm:ss");
         });
     };
+    function alteraCoresDoConformeStatusDeTarefa() {
+        $scope.DataAtual = new Date().getTime();
 
+        $scope.Tarefas.forEach(item => item["Cor"] =
+            (item["DataTimeStamp"] <= $scope.DataAtual || item["DataTimeStamp"] >= $scope.DataAtual) && item["StatusTarefa"] == "Concluída!" ? concluida
+                : (item["DataTimeStamp"] <= $scope.DataAtual || item["DataTimeStamp"] >= $scope.DataAtual) && item["StatusTarefa"] == "Não fazer" ? naoFazer
+                    : (item["DataTimeStamp"] <= $scope.DataAtual || item["StatusTarefa"] == "Pendente") ? pendente : praFazer
+        );
+    };
 
     //Obter Tarefas
     function obterListaDeTarefasParaSeremCarregadasEmTela() {
         tarefaServices.acessarRepositorioParaObterListaTarefas().then(function (cadaTarefaRetornada) {
             $scope.Tarefas = cadaTarefaRetornada.data;
             trataFormatoDeDatasParaExibicaoNaLista();
+            alteraCoresDoConformeStatusDeTarefa();
         }, () => alert("Erro ao obter Tarefas"));
     };
 

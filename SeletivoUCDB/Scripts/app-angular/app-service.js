@@ -1,4 +1,9 @@
-﻿appTarefas.service("tarefaServices", function ($http) {
+﻿const praFazer = "list-group-item";
+const pendente = "list-group-item list-group-item-info";
+const concluida = "list-group-item list-group-item-success";
+const naoFazer = "list-group-item disabled";
+
+appTarefas.service("tarefaServices", function ($http) {
 
     this.acessarRepositorioParaObterListaTarefas = () => $http.get("/Tarefas/ObterListaDeTarefasArmazenadasNoBD");
 
